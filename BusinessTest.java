@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
-import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 
 public class BusinessTest
@@ -23,18 +23,19 @@ public class BusinessTest
 	public static void main(String[] args) throws IOException
 	{
 		
+		Scanner keyboard = new Scanner(System.in);
+		
 		ArrayList<Employee> employeeAL = new ArrayList<Employee>();
 		ArrayList<Manager> managerAL = new ArrayList<Manager>();
 		ArrayList<Executive> executiveAL = new ArrayList<Executive>();
-		
-		Scanner keyboard = new Scanner(System.in);
-		File file;
+		File file = null;
 		
 		do
 		{
 			System.out.printf("Please enter the employee list text file name: ");
-		
-			file = new File(keyboard.nextLine());
+			String fileName = keyboard.nextLine();
+			file = new File(fileName);
+			
 		
 		} while (!file.exists());
 		
@@ -43,25 +44,34 @@ public class BusinessTest
 		while(inFile.hasNext())
 		{
 			
+			String name = "";
+			String title = "";
+			int idNumber = 0;
+			int age = 0;
+			double salary = 0.0;
+			
 			try
 			{
 				
-				String name = keyboard.next();
-				String title = keyboard.next();
-				int idNumber = keyboard.nextInt();
-				int age = keyboard.nextInt();
-				double salary = keyboard.nextDouble();
+				name = inFile.next();
+				title = inFile.next();
+				idNumber = inFile.nextInt();
+				age = inFile.nextInt();
+				salary = inFile.nextDouble();
+				if (inFile.hasNext())
+				{
+					
+					inFile.nextLine();
+				
+				}
+				
 			}
 			catch (InputMismatchException e)
 			{
 				
-				System.out.printf("Corrupt Data! Terminating Program!\n);
+				System.out.printf("Corrupt Data! Terminating Program!\n");
 				System.exit(0);
 				
-			}
-			finally
-			{
-				keyboard.nextLine();
 			}
 			
 			if (1 <= idNumber && idNumber <= 2000)
@@ -91,22 +101,24 @@ public class BusinessTest
 			
 		}
 		
-		int indexOfManager = 0;
-		for (Employee employee : employeesAL)
+		inFile.close();
+		
+		int indexOfAddManager = 0;
+		for (Employee employee : employeeAL)
 		{
 			
-			managerAL.get(indexOfManager++).addManagedEmployee(employee);
+			managerAL.get(indexOfAddManager++).addManagedEmployee(employee);
 			
-			indexOfManager %= managerAL.size();
+			indexOfAddManager %= managerAL.size();
 			
 		}
 		
-		int indexOfExecutive = 0;
+		int indexOfAddExecutive = 0;
 		for (Manager manager : managerAL)
 		{
 			
-			executiveAL.get(indexOfExecutive++).addManagedEmployee(manager);
-			indexOfExecutive %= executiveAL.size();
+			executiveAL.get(indexOfAddExecutive++).addManagedEmployee(manager);
+			indexOfAddExecutive %= executiveAL.size();
 			
 		}
 		
@@ -119,14 +131,14 @@ public class BusinessTest
 		keyboard.nextLine();
 		
 		System.out.printf("Please enter the name of the ouput file: ");
-		FileWriter outputFile = new FileWriter(keyboard.nextLine());
+		PrintWriter outputFile = new PrintWriter(new File(keyboard.nextLine()));
 		
 		
 		double totalPayRoll = 0;
 		
 		for (Executive executive : executiveAL)
 		{
-			
+			executive.setTotalComp(profit, bonus);
 			totalPayRoll += executive.getTotalComp();
 			
 		}
@@ -141,7 +153,7 @@ public class BusinessTest
 		{
 			
 			//					name,  title, id, age,  salary, total comp
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-15,.2f$%,.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-15.2f$%.2f\n", 
 								executive.getName(), executive.getTitle(),
 								executive.getIdNumber(), executive.getAge(), 
 								executive.getSalary(), executive.getTotalComp());
@@ -156,10 +168,10 @@ public class BusinessTest
 		for (Manager manager : managerAL)
 		{
 			
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-15,.2f$%,.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-15.2f\n", 
 								manager.getName(), manager.getTitle(),
 								manager.getIdNumber(), manager.getAge(), 
-								manager.getSalary(), manager.getTotalComp());
+								manager.getSalary());
 			
 		}
 		
@@ -171,10 +183,10 @@ public class BusinessTest
 		for (Employee employee : employeeAL)
 		{
 			
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-15,.2f$%,.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-15.2f\n", 
 								employee.getName(), employee.getTitle(),
 								employee.getIdNumber(), employee.getAge(), 
-								empployee.getSalary(), employee.getTotalComp());
+								employee.getSalary());
 			
 		}
 		
@@ -187,12 +199,12 @@ public class BusinessTest
 		for (Executive executive : executiveAL)
 		{
 			
-			outputFile.printf("Executive %s has the following direct reports\n");
+			outputFile.printf("Executive %s has the following direct reports\n", executive.getName());
 			
-			for (int indexOfExecutive = 0; indexOfExecutive < executive.getManagedEmployeesListSize() - 1; indexOfExecutive++)
+			for (int indexOfExecutive = 0; indexOfExecutive < executive.getManagedEmployeeListSize(); indexOfExecutive++)
 			{
 				
-				Manager current = executive.getManagedEmployee(indexOfExecutive);
+				Employee current = executive.getManagedEmployee(indexOfExecutive);
 				
 				outputFile.printf("%-15s%d\n", current.getName(), current.getIdNumber());
 				
@@ -209,9 +221,9 @@ public class BusinessTest
 		for (Manager manager : managerAL)
 		{
 			
-			outputFile.printf("Manager %s has the following direct reports\n");
+			outputFile.printf("Manager %s has the following direct reports\n", manager.getName());
 			
-			for (int indexOfManager = 0; indexOfManager < manager.getManagedEmployeesListSize() - 1; indexOfManager++)
+			for (int indexOfManager = 0; indexOfManager < manager.getManagedEmployeeListSize(); indexOfManager++)
 			{
 				
 				Employee current = manager.getManagedEmployee(indexOfManager);
@@ -226,8 +238,21 @@ public class BusinessTest
 		
 		outputFile.printf("\n");
 		
+		System.out.printf("Please enter the salary change for a Manager as a percentage: ");
+		double change = keyboard.nextDouble();
+		keyboard.nextLine();
+		
+		outputFile.printf("Manager List iWith New Salary\n");
+		
+		for (Manager manager : managerAL)
+		{
+			
+			outputFile.printf("%s\n", manager);
+		
+		}
 		
 		
+		outputFile.close();
 		
 		keyboard.close();
 		

@@ -44,7 +44,7 @@ public class Executive extends Manager
 	public void setIdNumber(int idNumber)
 	{
 		
-		super.idNumber = (3001 <= idNumber && idNumber <= 3500) ? idNumber : 0;
+		super.setIdNumber((3001 <= idNumber && idNumber <= 3500) ? idNumber : 0);
 		
 	}
 	
