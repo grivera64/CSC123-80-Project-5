@@ -12,13 +12,14 @@
  
  public class Employee
  {
-	 
+	 //private global fields
 	 private String name;
 	 private String title;
 	 private int idNumber;
 	 private int age;
 	 private double salary;
 	 
+	 //constructor for initializing employee
 	 public Employee(String name, String title, int idNumber, int age, double salary)
 	 {
 		 
@@ -29,6 +30,8 @@
 		 this.setSalary(salary);
 		 
 	 }
+	 
+	 /* Accessor and Mutator Methods Start */
 	 
 	 public void setName(String name)
 	 {
@@ -100,22 +103,20 @@
 		 
 	 }
 	 
+	 /* Accessor and Mutator Methods End */
+	 
+	 //changes the salary based on a percentage
 	 public void changeSalary(double percentage)
 	 {
 		 
-		 if (percentage < -100.0001 || 100.001 < percentage)
-		 {
-			 
-			 System.out.printf("Error! Salary not changed.\n");
-			 return;
-			 
-		 }
-		 
-		 this.setSalary(this.getSalary() * (1.0 + (percentage * 0.01)));
+		 this.setSalary(this.getSalary() + (this.getSalary() * (percentage * 0.01)));
 		 
 	 }
 	 
+	 /* Accessor and Mutator Methods End */
+	 
 	 //@Override
+	 //Overriding the toSring() method to provide our own string return for an Employee
 	 public String toString()
 	 {
 		 

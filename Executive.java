@@ -10,11 +10,14 @@
 *	
 */
 
+//inhertis the Manager class (which inherites the Exployee class)
 public class Executive extends Manager
 {
 	
+	//private global variables
 	private double totalComp;
 	
+	//constructor specific to Executive Manager Employee
 	public Executive(String name, String title, int idNumber, int age, double salary)
 	{
 		
@@ -22,11 +25,11 @@ public class Executive extends Manager
 		
 	}
 	
-	//bug here ASK ABOUT in class
+	/* Mutator and Accessor */
 	public void setTotalComp(double profits, double bonus)
 	{
 		
-		this.totalComp = profits + bonus;
+		this.totalComp = super.getSalary() + (profits * (bonus * 0.01));
 		
 	}
 	
@@ -39,6 +42,7 @@ public class Executive extends Manager
 	
 	
 	//@Override
+	//Returns a string version of the Executive
 	public String toString()
 	{
 		

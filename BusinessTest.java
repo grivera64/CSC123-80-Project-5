@@ -9,25 +9,35 @@
 *	
 */
 
+//importing ArrayList from util
 import java.util.ArrayList;
+//importing Scanner
 import java.util.Scanner;
+//impoting File
 import java.io.File;
+//importing Exception
 import java.io.IOException;
+//importing PrintWriter
 import java.io.PrintWriter;
+//importing Exceptions
 import java.util.InputMismatchException;
 
 public class BusinessTest
 {
 	
-	
+	//driver (entrance) method
 	public static void main(String[] args) throws IOException
 	{
 		
+		//Make keyboard scanner
 		Scanner keyboard = new Scanner(System.in);
 		
+		//make Array List of each type of employee
 		ArrayList<Employee> employeeAL = new ArrayList<Employee>();
 		ArrayList<Manager> managerAL = new ArrayList<Manager>();
 		ArrayList<Executive> executiveAL = new ArrayList<Executive>();
+		
+		//create file variable (must exists to continue)
 		File file = null;
 		
 		do
@@ -39,17 +49,19 @@ public class BusinessTest
 		
 		} while (!file.exists());
 		
+		//scan file
 		Scanner inFile = new Scanner(file);
-		
 		while(inFile.hasNext())
 		{
 			
+			//initializing to default
 			String name = "";
 			String title = "";
 			int idNumber = 0;
 			int age = 0;
 			double salary = 0.0;
 			
+			//try to read from file unless inproper data type
 			try
 			{
 				
@@ -66,7 +78,7 @@ public class BusinessTest
 				}
 				
 			}
-			catch (InputMismatchException e)
+			catch (InputMismatchException e) 		//exit if improper data
 			{
 				
 				System.out.printf("Corrupt Data! Terminating Program!\n");
@@ -74,6 +86,7 @@ public class BusinessTest
 				
 			}
 			
+			//add to specific ArrayList
 			if (1 <= idNumber && idNumber <= 2000)
 			{
 				
@@ -101,8 +114,10 @@ public class BusinessTest
 			
 		}
 		
+		//close Scanner
 		inFile.close();
 		
+		/* add each Employee type under the higher Employee's managedEmployee ArrayList */
 		int indexOfAddManager = 0;
 		for (Employee employee : employeeAL)
 		{
@@ -122,6 +137,9 @@ public class BusinessTest
 			
 		}
 		
+		/* End add to ArrayList */
+		
+		/* ask user for input and store */
 		System.out.printf("Please enter the total company profit for the year: $");
 		double profit = keyboard.nextDouble();
 		keyboard.nextLine();
@@ -130,10 +148,13 @@ public class BusinessTest
 		double bonus = keyboard.nextDouble();
 		keyboard.nextLine();
 		
+		//create output file
 		System.out.printf("Please enter the name of the ouput file: ");
 		PrintWriter outputFile = new PrintWriter(new File(keyboard.nextLine()));
 		
+		/* End asking */
 		
+		//calcuating the Total Compensation
 		double totalPayRoll = 0;
 		
 		for (Executive executive : executiveAL)
@@ -143,6 +164,7 @@ public class BusinessTest
 			
 		}
 		
+		/* Print to Output File */
 		outputFile.printf("The total payroll for the business is $%,.2f\n", totalPayRoll);
 		
 		outputFile.printf("Compensation Table\nExecutives\n");
@@ -153,7 +175,7 @@ public class BusinessTest
 		{
 			
 			//					name,  title, id, age,  salary, total comp
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-14.2f$%.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-,14.2f$%,.2f\n", 
 								executive.getName(), executive.getTitle(),
 								executive.getIdNumber(), executive.getAge(), 
 								executive.getSalary(), executive.getTotalComp());
@@ -168,7 +190,7 @@ public class BusinessTest
 		for (Manager manager : managerAL)
 		{
 			
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-15.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-,15.2f\n", 
 								manager.getName(), manager.getTitle(),
 								manager.getIdNumber(), manager.getAge(), 
 								manager.getSalary());
@@ -183,7 +205,7 @@ public class BusinessTest
 		for (Employee employee : employeeAL)
 		{
 			
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-15.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-,15.2f\n", 
 								employee.getName(), employee.getTitle(),
 								employee.getIdNumber(), employee.getAge(), 
 								employee.getSalary());
@@ -238,23 +260,28 @@ public class BusinessTest
 		
 		outputFile.printf("\n");
 		
+		/* End Printing to Output File temporarily */
+		
+		//request for salary change percentage and store
 		System.out.printf("Please enter the salary change for a Manager as a percentage: ");
 		double change = keyboard.nextDouble();
 		keyboard.nextLine();
 		
+		/* Finish printing to Output File */
 		outputFile.printf("Manager List iWith New Salary\n");
 		
 		for (Manager manager : managerAL)
 		{
-			
+			manager.changeSalary(change);
 			outputFile.printf("%s\n", manager);
 		
 		}
 		
-		
+		//close Files and Scanners
 		outputFile.close();
-		
 		keyboard.close();
+		
+		//Terminate Program
 		
 	}
 	
