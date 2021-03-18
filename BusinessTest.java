@@ -153,7 +153,7 @@ public class BusinessTest
 		{
 			
 			//					name,  title, id, age,  salary, total comp
-			outputFile.printf("%-15s%-18s%-9d%-7d$%-15.2f$%.2f\n", 
+			outputFile.printf("%-15s%-18s%-9d%-7d$%-14.2f$%.2f\n", 
 								executive.getName(), executive.getTitle(),
 								executive.getIdNumber(), executive.getAge(), 
 								executive.getSalary(), executive.getTotalComp());

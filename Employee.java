@@ -61,7 +61,7 @@
 	 public void setIdNumber(int idNumber)
 	 {
 		 
-		 this.idNumber = (idNumber > 0 && idNumber <= 2000) ? idNumber : 0;
+		 this.idNumber = idNumber;
 		 
 	 }
 	 

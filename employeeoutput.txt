@@ -1,17 +1,17 @@
-The total payroll for the business is $13,496,479.00
+The total payroll for the business is $1,753,863.00
 Compensation Table
 Executives
 Name           Title             ID       Age    Salary         Total Comp
-Guitierez      ExecutiveStrat    0        37     $167854.00      $6744784.00
-Silva          ExecSW            0        42     $174765.00      $6751695.00
+Guitierez      ExecutiveStrat    3001     37     $167854.00     $876931.50
+Silva          ExecSW            3119     42     $174765.00     $876931.50
 
 Managers
 Name           Title             ID       Age    Salary         
-Choi           ManagerEng        0        34     $104765.00      
-Taki           ManagerSW         0        38     $134765.00      
-Yem            ManagerEE         0        32     $112235.00      
-Rosendo        ManagerHR         0        36     $81213.00       
-Puig           ManagerEE         0        42     $144111.00      
+Choi           ManagerEng        2309     34     $104765.00      
+Taki           ManagerSW         2379     38     $134765.00      
+Yem            ManagerEE         2001     32     $112235.00      
+Rosendo        ManagerHR         2009     36     $81213.00       
+Puig           ManagerEE         2311     42     $144111.00      
 
 Employees
 Name           Title             ID       Age    Salary         
@@ -32,13 +32,13 @@ Reporting Structure
 
 Direct Reports To Executive
 Executive Guitierez has the following direct reports
-Choi           0
-Yem            0
-Puig           0
+Choi           2309
+Yem            2001
+Puig           2311
 
 Executive Silva has the following direct reports
-Taki           0
-Rosendo        0
+Taki           2379
+Rosendo        2009
 
 
 
@@ -67,17 +67,17 @@ Sosa           1959
 
 Manager List iWith New Salary
 The manager name and title are Choi ManagerEng
-The manager ID is 0 The manager age is 34
+The manager ID is 2309 The manager age is 34
 The manager salary is $104765.00
 The manager name and title are Taki ManagerSW
-The manager ID is 0 The manager age is 38
+The manager ID is 2379 The manager age is 38
 The manager salary is $134765.00
 The manager name and title are Yem ManagerEE
-The manager ID is 0 The manager age is 32
+The manager ID is 2001 The manager age is 32
 The manager salary is $112235.00
 The manager name and title are Rosendo ManagerHR
-The manager ID is 0 The manager age is 36
+The manager ID is 2009 The manager age is 36
 The manager salary is $81213.00
 The manager name and title are Puig ManagerEE
-The manager ID is 0 The manager age is 42
+The manager ID is 2311 The manager age is 42
 The manager salary is $144111.00

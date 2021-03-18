@@ -22,13 +22,11 @@ public class Executive extends Manager
 		
 	}
 	
+	//bug here ASK ABOUT in class
 	public void setTotalComp(double profits, double bonus)
 	{
 		
-		this.totalComp = super.getSalary() + 
-						(profits * 
-						((bonus < -0.0001 || 100.0001 < bonus) ? 0 : bonus)
-						);
+		this.totalComp = profits + bonus;
 		
 	}
 	
@@ -39,14 +37,6 @@ public class Executive extends Manager
 		
 	}
 	
-	//@Override
-	//uses "Dynamic Dispatch"
-	public void setIdNumber(int idNumber)
-	{
-		
-		super.setIdNumber((3001 <= idNumber && idNumber <= 3500) ? idNumber : 0);
-		
-	}
 	
 	//@Override
 	public String toString()

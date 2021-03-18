@@ -46,15 +46,6 @@ public class Manager extends Employee
 	}
 	
 	//@Override
-	//uses "Dynamic Dispatch"
-	public void setIdNumber(int idNumber)
-	{
-		
-		super.setIdNumber((2000 < idNumber && idNumber <= 3000) ? idNumber : 0);
-		
-	}
-	
-	//@Override
 	public String toString()
 	{
 		
