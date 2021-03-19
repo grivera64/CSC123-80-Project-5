@@ -288,7 +288,7 @@ public class BusinessTest
 		for (Manager manager : managerAL)
 		{
 			manager.changeSalary(change);
-			outputFile.printf("%s\n", manager);
+			outputFile.printf("%s\n\n", manager);
 		
 		}
 		
