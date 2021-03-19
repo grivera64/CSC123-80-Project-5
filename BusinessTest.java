@@ -164,6 +164,21 @@ public class BusinessTest
 			
 		}
 		
+		for (Manager manager : managerAL)
+		{
+			
+			totalPayRoll += manager.getSalary();
+			
+		}
+		
+		for (Employee employee : employeeAL)
+		{
+			
+			totalPayRoll += employee.getSalary();
+			
+		}
+		
+		
 		/* Print to Output File */
 		outputFile.printf("The total payroll for the business is $%,.2f\n", totalPayRoll);
 		
